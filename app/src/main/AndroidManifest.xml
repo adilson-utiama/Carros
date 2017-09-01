@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.CarrosActivity"
+            android:parentActivityName=".activity.MainActivity" />
+
     </application>
 
 </manifest>
