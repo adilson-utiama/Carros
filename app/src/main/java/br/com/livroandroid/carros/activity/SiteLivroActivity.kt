@@ -3,11 +3,14 @@ package br.com.livroandroid.carros.activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
+import android.util.Log
 import android.view.View
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import br.com.livroandroid.carros.R
+import br.com.livroandroid.carros.activity.dialogs.AboutDialog
 import br.com.livroandroid.carros.extensions.setupToolBar
 import kotlinx.android.synthetic.main.activity_site_livro.*
 
@@ -63,6 +66,17 @@ class SiteLivroActivity : BaseActivity() {
 
                 //Termmina a nimacao do Swipe to Refresh
                 swipeToRefresh?.isRefreshing = false
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                val url = request?.url.toString()
+                if (url.endsWith("sobre.htm")) {
+                    //Mostra o Dialog
+                    AboutDialog.showAbout(supportFragmentManager)
+                    //retorna true para informar que interceptamos o evento
+                    return true
+                }
+                return super.shouldOverrideUrlLoading(view, request)
             }
         }
     }
