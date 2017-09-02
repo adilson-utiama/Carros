@@ -1,7 +1,5 @@
 package br.com.livroandroid.carros.activity
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -18,8 +16,8 @@ import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(icicle: Bundle?) {
+        super.onCreate(icicle)
         setContentView(R.layout.activity_main)
 
         setupToolBar(R.id.toolbar)
@@ -62,7 +60,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 startActivity<CarrosActivity>("tipo" to TipoCarro.luxo)
             }
             R.id.nav_item_site_livro -> {
-                toast("Clicou em site do Livro")
+                startActivity<SiteLivroActivity>()
             }
             R.id.nav_item_settings -> {
                 toast("Clicou em Configurações")

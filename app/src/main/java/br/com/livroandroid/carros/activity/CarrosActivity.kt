@@ -1,7 +1,6 @@
 package br.com.livroandroid.carros.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import br.com.livroandroid.carros.R
 import br.com.livroandroid.carros.domain.TipoCarro
 import br.com.livroandroid.carros.extensions.addFragment
@@ -13,8 +12,8 @@ import br.com.livroandroid.carros.fragments.CarrosFragment
  */
 class CarrosActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(icicle: Bundle?) {
+        super.onCreate(icicle)
 
         setContentView(R.layout.activity_carros)
 
@@ -24,7 +23,7 @@ class CarrosActivity : BaseActivity() {
 
         //Toolbar : configura o titulo e o "Up Navigation"
         setupToolBar(R.id.toolbar, title, true)
-        if (savedInstanceState == null) {
+        if (icicle == null) {
             //Adiciona o fragment no layout de marcacao
             //Dentre os argumentos que foram passados para a activity, esta o  tipo de carro
             addFragment(R.id.container, CarrosFragment())
