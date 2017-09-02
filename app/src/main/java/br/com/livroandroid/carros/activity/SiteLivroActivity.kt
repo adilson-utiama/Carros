@@ -2,6 +2,7 @@ package br.com.livroandroid.carros.activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -15,6 +16,7 @@ class SiteLivroActivity : BaseActivity() {
     private val URL_SOBRE = "http://www.livroandroid.com.br/sobre.htm"
     var webView: WebView? = null
     var progress: ProgressBar? = null
+    var swipeToRefresh: SwipeRefreshLayout? = null
 
     override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
@@ -31,6 +33,19 @@ class SiteLivroActivity : BaseActivity() {
         //Carrega a pagina
         setWebViewClient(webview)
         webView?.loadUrl(URL_SOBRE)
+
+        //Swipe to Refresh
+        swipeToRefresh = findViewById<SwipeRefreshLayout>(R.id.swipeTorefresh)
+        swipeToRefresh?.setOnRefreshListener {
+            webView?.reload()
+        }
+
+        //Cores da Animacao
+        swipeToRefresh?.setColorSchemeResources(
+                R.color.refresh_progress_1,
+                R.color.refresh_progress_2,
+                R.color.refresh_progress_3
+        )
     }
 
     private fun setWebViewClient(webview: WebView?) {
@@ -45,6 +60,9 @@ class SiteLivroActivity : BaseActivity() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 //Desliga o Progress
                 progress?.visibility = View.INVISIBLE
+
+                //Termmina a nimacao do Swipe to Refresh
+                swipeToRefresh?.isRefreshing = false
             }
         }
     }
