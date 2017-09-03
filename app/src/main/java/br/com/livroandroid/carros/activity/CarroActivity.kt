@@ -9,17 +9,16 @@ import kotlinx.android.synthetic.main.activity_carro_contents.*
 
 class CarroActivity : BaseActivity() {
 
-    var carro: Carro? = null
+    //Lazy loading: evita objetos nulos, nao sendo necessario operador ?
+    //Lança uma exceçao, caso o objeto seja null
+    val carro by lazy { intent.getSerializableExtra("carro") as Carro }
 
     override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
         setContentView(R.layout.activity_carro)
 
-        //Le o carro enviado como parametro
-        carro = intent.getSerializableExtra("carro") as Carro
-
         //Seta o nome do carro como titulo da toolbar
-        setupToolBar(R.id.toolbar, carro?.nome, true)
+        setupToolBar(R.id.toolbar, carro.nome, true)
 
         //Atualiza os dados do carro na tela
         initViews()
@@ -27,7 +26,7 @@ class CarroActivity : BaseActivity() {
 
     fun initViews() {
         //Variaveis geradas automaticamente pelo Kotlin Extensions (Veja Import)
-        tDesc.text = carro?.desc
-        img.loadUrl(carro?.urlFoto)
+        tDesc.text = carro.desc
+        img.loadUrl(carro.urlFoto)
     }
 }
