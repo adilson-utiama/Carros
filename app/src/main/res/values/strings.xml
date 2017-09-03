@@ -18,7 +18,7 @@ Versao %s<br><br>
     <string name="about_dialog_title">Livro Android</string>
     <!-- C -->
     <string name="carros">Carros</string>
-    <string name="configuracoes">Configuraçõeses</string>
+    <string name="configuracoes">Configurações</string>
     <string name="classicos">Clássicos</string>
     <string name="classico">Clássico</string>
     <!-- D -->
@@ -26,7 +26,7 @@ Versao %s<br><br>
 
     <!-- E -->
     <string name="esportivos">Esportivos</string>
-    <string name="esportivo">Esportivos</string>
+    <string name="esportivo">Esportivo</string>
 
     <!-- F -->
     <string name="favoritos">Favoritos</string>
