@@ -2,6 +2,7 @@ package br.com.livroandroid.carros.activity
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -26,6 +27,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupToolBar(R.id.toolbar)
         setupNavDrawer()
         setupViewPagerTabs()
+
+        //FAB: Floating Action button (variavel fab foi gerada pelo Kotlin Extensions)
+        fab.setOnClickListener() {
+            val snack = Snackbar.make(it, "Clicou no botao FAB!", Snackbar.LENGTH_LONG)
+            snack.show()
+        }
     }
 
     //Configura o Navigation Drawer
@@ -45,6 +52,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     }
 
+    //Configura o ViewPager e os tabs
     private fun setupViewPagerTabs() {
         //Configura o viewPager + tabs
         //As variaveis viewPager e tabLayout sao geradas automaticamente pelo Kotlin Extensions
