@@ -51,14 +51,21 @@ class CarroAdapter(
         //A view contem as variaveis definidas no XML (Lembre-se do nomde de cada id)
         val view = holder.itemView
 
-        //Atualiza os dados do carro
-        view.tNome.text = carro.nome
+        //Funcao with()
+        //aceita um objeto como parametro, executa uma expressao entre chaves,
+        //permite acessar variaveis sem usar o objeto
 
-        //Faz o download da foto e mostra o ProgressBAr
-        view.img.loadUrl(carro.urlFoto, view.progress)
+        with(view) {
+            //Atualiza os dados do carro
+            tNome.text = carro.nome
 
-        //Adiciona o evento de clique na linha
-        view.setOnClickListener { onClick(carro) }
+            //Faz o download da foto e mostra o ProgressBAr
+            img.loadUrl(carro.urlFoto, view.progress)
+
+            //Adiciona o evento de clique na linha
+            setOnClickListener { onClick(carro) }
+        }
+
     }
 
 
