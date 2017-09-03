@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.livroandroid.carros.R
 import br.com.livroandroid.carros.domain.Carro
+import br.com.livroandroid.carros.extensions.loadUrl
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -25,21 +26,6 @@ class CarroAdapter(
         val onClick: (Carro) -> Unit
 ) : RecyclerView.Adapter<CarroAdapter.CarrosViewHolder>() {
 
-    //ViewHolder com as views
-    class CarrosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var tNome: TextView
-        var img: ImageView
-        var progress: ProgressBar
-        var cardView: CardView
-
-        init {
-            //Salva as views no ViewHolder
-            tNome = view.findViewById<TextView>(R.id.tNome)
-            img = view.findViewById<ImageView>(R.id.img)
-            progress = view.findViewById<ProgressBar>(R.id.progress)
-            cardView = view.findViewById<CardView>(R.id.card_view)
-        }
-    }
 
     // retorna a quantidade de carros na lista
     override fun getItemCount() = this.carros.size
@@ -56,30 +42,40 @@ class CarroAdapter(
     }
 
     //Faz o bind para atualizar o valor das views com os dados do carro
-    override fun onBindViewHolder(holder: CarrosViewHolder?, position: Int) {
-        val context = holder?.itemView?.context
+    override fun onBindViewHolder(holder: CarrosViewHolder, position: Int) {
 
         //Recupera o objeto Carro
         val carro = carros[position]
 
+        //Declara a variavel view para facilitar o acesso abaixo
+        //A view contem as variaveis definidas no XML (Lembre-se do nomde de cada id)
+        val view = holder.itemView
+
         //Atualiza os dados do carro
-        holder?.tNome?.text = carro.nome
-        holder?.progress?.visibility = View.VISIBLE
+        view.tNome.text = carro.nome
 
         //Faz o download da foto e mostra o ProgressBAr
-        Picasso.with(context).load(carro.urlFoto).fit().into(holder?.img,
-                object : Callback {
-                    override fun onSuccess() {
-                        //Download OK
-                        holder?.progress?.visibility = View.GONE
-                    }
-
-                    override fun onError() {
-                        holder?.progress?.visibility = View.GONE
-                    }
-                })
+        view.img.loadUrl(carro.urlFoto, view.progress)
 
         //Adiciona o evento de clique na linha
-        holder?.itemView?.setOnClickListener { onClick(carro) }
+        view.setOnClickListener { onClick(carro) }
+    }
+
+
+    //ViewHolder com as views
+    class CarrosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        //usando Android Extensions
+//        var tNome: TextView
+//        var img: ImageView
+//        var progress: ProgressBar
+//        var cardView: CardView
+//
+//        init {
+//            //Salva as views no ViewHolder
+//            tNome = view.findViewById<TextView>(R.id.tNome)
+//            img = view.findViewById<ImageView>(R.id.img)
+//            progress = view.findViewById<ProgressBar>(R.id.progress)
+//            cardView = view.findViewById<CardView>(R.id.card_view)
+//        }
     }
 }
