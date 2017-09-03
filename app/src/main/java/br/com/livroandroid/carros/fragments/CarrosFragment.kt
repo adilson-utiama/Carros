@@ -10,12 +10,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import br.com.livroandroid.carros.R
+import br.com.livroandroid.carros.activity.CarroActivity
 import br.com.livroandroid.carros.adapter.CarroAdapter
 import br.com.livroandroid.carros.domain.Carro
 import br.com.livroandroid.carros.domain.CarroService
 import br.com.livroandroid.carros.domain.TipoCarro
 import br.com.livroandroid.carros.extensions.toast
 import kotlinx.android.synthetic.main.fragment_carros.*
+
+import org.jetbrains.anko.startActivity
 
 
 class CarrosFragment : BaseFragment() {
@@ -66,7 +69,7 @@ class CarrosFragment : BaseFragment() {
     }
 
     fun onClickCarro(carro: Carro) {
-        toast("Clicou no carro ${carro.nome}")
+        activity.startActivity<CarroActivity>("carro" to carro)
     }
 
 }
