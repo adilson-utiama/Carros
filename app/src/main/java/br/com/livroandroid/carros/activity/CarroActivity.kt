@@ -11,7 +11,7 @@ class CarroActivity : BaseActivity() {
 
     //Lazy loading: evita objetos nulos, nao sendo necessario operador ?
     //Lança uma exceçao, caso o objeto seja null
-    val carro by lazy { intent.getSerializableExtra("carro") as Carro }
+    val carro: Carro by lazy { intent.getParcelableExtra<Carro>("carro") }
 
     override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
