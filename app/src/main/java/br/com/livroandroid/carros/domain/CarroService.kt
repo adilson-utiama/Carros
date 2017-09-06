@@ -3,6 +3,7 @@ package br.com.livroandroid.carros.domain
 import android.content.Context
 import android.util.Log
 import br.com.livroandroid.carros.R
+import br.com.livroandroid.carros.extensions.fromJson
 import br.com.livroandroid.carros.extensions.getText
 import br.com.livroandroid.carros.extensions.getXml
 import org.json.JSONArray
@@ -29,7 +30,9 @@ object CarroService {
 
             //Le o json e cria a lista de carros
             val json = it.readText()
-            val carros = parserJSON(json)
+
+            //Converte o Json para List<Carro>
+            val carros = fromJson<List<Carro>>(json)
             return carros
         }
     }

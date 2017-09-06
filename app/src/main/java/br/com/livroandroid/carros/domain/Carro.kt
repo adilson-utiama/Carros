@@ -2,6 +2,7 @@ package br.com.livroandroid.carros.domain
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
@@ -13,8 +14,14 @@ class Carro : Parcelable {
     var tipo = ""
     var nome = ""
     var desc = ""
+
+    @SerializedName("url_foto")
     var urlFoto = ""
+
+    @SerializedName("url_info")
     var urlInfo = ""
+
+    @SerializedName("url_video")
     var urlVideo = ""
     var latitude = ""
     var longitude = ""
