@@ -1,12 +1,15 @@
 package br.com.livroandroid.carros.activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import br.com.livroandroid.carros.R
 import br.com.livroandroid.carros.domain.Carro
 import br.com.livroandroid.carros.extensions.loadUrl
 import br.com.livroandroid.carros.extensions.setupToolBar
 import kotlinx.android.synthetic.main.activity_carro.*
 import kotlinx.android.synthetic.main.activity_carro_contents.*
+import org.jetbrains.anko.startActivity
 
 class CarroActivity : BaseActivity() {
 
@@ -29,5 +32,24 @@ class CarroActivity : BaseActivity() {
         //Variaveis geradas automaticamente pelo Kotlin Extensions (Veja Import)
         tDesc.text = carro.desc
         appBarImg.loadUrl(carro.urlFoto)
+    }
+
+    //Adiciona as opcoes Salvar e Deletar no Menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_carro, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_editar -> {
+                startActivity<CarroFormActivity>("carro" to carro)
+                finish()
+            }
+            R.id.action_deletar -> {
+                TODO("deletar o carro")
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

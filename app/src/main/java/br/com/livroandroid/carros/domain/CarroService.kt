@@ -36,7 +36,7 @@ object CarroService {
 
     //Salva um carro
     fun save(carro: Carro): Response {
-        //Faz PPOST do JSON carro
+        //Faz POST do JSON carro
         val json = HttpHelper.post(BASE_URL, carro.toJson())
         val response = fromJson<Response>(json)
         return response

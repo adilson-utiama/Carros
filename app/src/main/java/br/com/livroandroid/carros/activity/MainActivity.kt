@@ -30,8 +30,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         //FAB: Floating Action button (variavel fab foi gerada pelo Kotlin Extensions)
         fab.setOnClickListener() {
-            val snack = Snackbar.make(it, "Clicou no botao FAB!", Snackbar.LENGTH_LONG)
-            snack.show()
+            //            val snack = Snackbar.make(it, "Clicou no botao FAB!", Snackbar.LENGTH_LONG)
+//            snack.show()
+            startActivity<CarroFormActivity>()
         }
     }
 

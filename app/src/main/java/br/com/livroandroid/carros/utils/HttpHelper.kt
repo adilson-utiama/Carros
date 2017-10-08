@@ -12,7 +12,7 @@ object HttpHelper {
     private val TAG = "http"
     private val LOG_ON = true
 
-    val JSON = MediaType.parse("application/json/ charset=utf-8")
+    val JSON = MediaType.parse("application/json; charset=utf-8")
     var client = OkHttpClient()
 
     //GET
