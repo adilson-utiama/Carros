@@ -16,9 +16,12 @@ import br.com.livroandroid.carros.domain.Carro
 import br.com.livroandroid.carros.domain.CarroService
 import br.com.livroandroid.carros.domain.TipoCarro
 import br.com.livroandroid.carros.extensions.toast
+import br.com.livroandroid.carros.utils.AndroidUtils
 import kotlinx.android.synthetic.main.fragment_carros.*
+import org.jetbrains.anko.doAsync
 
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.uiThread
 
 
 class CarrosFragment : BaseFragment() {
@@ -61,11 +64,25 @@ class CarrosFragment : BaseFragment() {
     }
 
     fun taskCarros() {
-        //Busca os carros
-        this.carros = CarroService.getCarros(context, tipo)
 
-        //Atualiza a lista
-        recyclerView.adapter = CarroAdapter(carros, { onClickCarro(it) })
+        val internetOK = AndroidUtils.isNetworkAvaiable(context)
+
+        if (internetOK) {
+            //Abre uma Thread
+            doAsync {
+                //Busca os carros
+                carros = CarroService.getCarros(context, tipo)
+
+                //Atualiza a lista na UI Thread
+                uiThread {
+                    //Atualiza a lista
+                    recyclerView.adapter = CarroAdapter(carros, { onClickCarro(it) })
+                }
+            }
+        } else {
+            toast("Não esta conectado na internet!")
+        }
+
     }
 
     fun onClickCarro(carro: Carro) {
