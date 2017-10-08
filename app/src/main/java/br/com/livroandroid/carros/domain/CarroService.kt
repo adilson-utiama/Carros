@@ -20,7 +20,7 @@ import java.net.URL
 object CarroService {
 
     private val TAG = "livro"
-    private val BASE_URL = "http://livrowebservices.com.br/rest/carros"
+    private val BASE_URL = "http://livrowebservices.com.br/rest/carros/"
 
     private var service: CarrosREST
 
@@ -34,7 +34,7 @@ object CarroService {
     }
 
     //Busca os carros por tipo (classicos, esportivos ou luxo)
-    fun getCarros(context: Context, tipo: TipoCarro): List<Carro> {
+    fun getCarros(tipo: TipoCarro): List<Carro> {
 
         val call = service.getCarros(tipo.name)
         val carros = call.execute().body()

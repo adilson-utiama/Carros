@@ -71,7 +71,7 @@ class CarrosFragment : BaseFragment() {
             //Abre uma Thread
             doAsync {
                 //Busca os carros
-                carros = CarroService.getCarros(context, tipo)
+                carros = CarroService.getCarros(tipo)
 
                 //Atualiza a lista na UI Thread
                 uiThread {
