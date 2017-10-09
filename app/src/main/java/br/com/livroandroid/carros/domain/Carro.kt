@@ -1,5 +1,7 @@
 package br.com.livroandroid.carros.domain
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -8,8 +10,11 @@ import java.io.Serializable
 /**
  * Created by Adilson on 03/09/2017.
  */
+
+@Entity(tableName = "carro")
 class Carro : Parcelable {
 
+    @PrimaryKey
     var id: Long = 0
     var tipo = ""
     var nome = ""

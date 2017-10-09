@@ -6,15 +6,13 @@ import android.view.MenuItem
 import br.com.livroandroid.carros.R
 import br.com.livroandroid.carros.domain.Carro
 import br.com.livroandroid.carros.domain.CarroService
+import br.com.livroandroid.carros.domain.FavoritosService
 import br.com.livroandroid.carros.extensions.loadUrl
 import br.com.livroandroid.carros.extensions.setupToolBar
 import br.com.livroandroid.carros.extensions.toast
 import kotlinx.android.synthetic.main.activity_carro.*
 import kotlinx.android.synthetic.main.activity_carro_contents.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
 class CarroActivity : BaseActivity() {
 
@@ -31,6 +29,21 @@ class CarroActivity : BaseActivity() {
 
         //Atualiza os dados do carro na tela
         initViews()
+
+        //variavel gerada automaticamente pelo Kotlin Extensions
+        fab.setOnClickListener { onClickFavoritar(carro) }
+    }
+
+    //Adiciona ou remove o carro dos favoritos
+    fun onClickFavoritar(carro: Carro) {
+        doAsync {
+            val favoritado = FavoritosService.favoritar(carro)
+            uiThread {
+                //Alerta de sucesso
+                toast(if (favoritado) R.string.msg_carro_favoritado
+                else R.string.msg_carro_desfavoritado)
+            }
+        }
     }
 
     fun initViews() {
